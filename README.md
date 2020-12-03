@@ -18,7 +18,7 @@ Things you may want to cover:
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
-| nickname           | string | null: false, unique: true |
+| nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |
 | family_name        | string | null: false               |
@@ -33,17 +33,17 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column            | Type       | Options     |
-| ----------------- | ---------- | ----------- |
-| item_name         | string     | null: false |
-| introduction      | text       | null: false |
-| category_id       | integer    | null: false |
-| item_condition_id | integer    | null: false |
-| postage_payer_id  | integer    | null: false |
-| shipping_area_id  | integer    | null: false |
-| prefecture_id     | integer    | null: false |
-| price             | integer    | null: false |
-| user              | references | null: false |
+| Column            | Type       | Options                       |
+| ----------------- | ---------- | ----------------------------- |
+| name       　　　  | string     | null: false                   |
+| introduction      | text       | null: false                   |
+| category_id       | integer    | null: false                   |
+| item_condition_id | integer    | null: false                   |
+| postage_payer_id  | integer    | null: false                   |
+| shipping_area_id  | integer    | null: false                   |
+| prefecture_id     | integer    | null: false                   |
+| price             | integer    | null: false                   |
+| user              | references | null: false, foreign_key: true|
 
 ### Association
 
@@ -65,18 +65,18 @@ Things you may want to cover:
 | house_number  | string     | null: false                    |
 | building_name | string     |                                |
 | phone_number  | string     | null: false                    |
-| purchase      | integer    | null: false, foreign_key: true |
+| purchase      | references | null: false, foreign_key: true |
 
 ### Association
 - has_one_active_hash :prefectures
-- has_one :purchase
+- belongs_to :purchase
 
 
 ## purchase
-| Column           | Type    | Options                        |
-| ---------------- | ------- | ------------------------------ |
-| user             | integer | null: false, foreign_key: true |
-| item             | integer | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
