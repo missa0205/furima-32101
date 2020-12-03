@@ -16,65 +16,74 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column           | Type   | Options                  |
-| ---------------- | ------ | ------------------------ |
-| nickname         | string | null: false              |
-| email            | string | null: false, unique: true|
-| password         | string | null: false              |
-| family_name      | string | null: false              |
-| first_name       | string | null: false              |
-| family_name_kana | string | null: false              |
-| first_name_kana  | string | null: false              |
-| birth_year       | date   | null: false              |
-| birth_month      | date   | null: false              |
-| birth_day        | date   | null: false              |
+| Column           | Type   | Options                   |
+| ---------------- | ------ | ------------------------- |
+| nickname         | string | null: false, unique: true |
+| email            | string | null: false, unique: true |
+| password         | string | null: false               |
+| family_name      | string | null: false               |
+| first_name       | string | null: false               |
+| family_name_kana | string | null: false               |
+| first_name_kana  | string | null: false               |
+| birth      　　　 | date   | null: false               |
 
 ### Association
-| has_many :items     |
-| has_many :purchases |
+- has_many :items
+- has_many :purchases
 
 ## items テーブル
 
-| Column            | Type    | Options     |
-| ----------------- | ------- | ----------- |
-| item_img          | string  | null: false |
-| item_name         | string  | null: false |
-| introduction      | text    | null: false |
-| price             | integer | null: false |
+| Column            | Type       | Options     |
+| ----------------- | ---------- | ----------- |
+| item_name         | string     | null: false |
+| introduction      | text       | null: false |
+| category          | integer    | null: false |
+| item_condition    | integer    | null: false |
+| postage_payer     | integer    | null: false |
+| shipping_area     | integer    | null: false |
+| shipping_day      | integer    | null: false |
+| price             | integer    | null: false |
+| user              | references | null: false |
 
 ### Association
-| has_one :category_id       |
-| has_one :item_condition_id |
-| has_one :postage_payer_id  |
-| has_one :shipping_area_id  |
-| has_one :shipping_day_id   |
-| belongs_to :user_id        |
+
+- belongs_to :user_id
+- has_one :purchase
+- belongs_to_active_hash :category
+- belongs_to_active_hash :item_condition
+- belongs_to_active_hash :postage_payer
+- belongs_to_active_hash :shipping_area
+- belongs_to_active_hash :shipping_day
 
 
 ## shipping_address
-| Column        | Type       | Options     |
-| ------------- | ---------- | ----------- |
-| zipcode       | integer(7) | null: false |
-| city          | string     | null: false |
-| state         | string     | null: false |
-| house_number  | string     | null: false |
-| building_name | string     |             |
-| phone_number  | integer    | null: false |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal_code   | string     | null: false                    |
+| prefecture    | integer    | null: false, foreign_key: true |
+| city          | string     | null: false                    |
+| house_number  | string     | null: false                    |
+| building_name | string     |                                |
+| phone_number  | string     | null: false                    |
+| purchase      | integer    | null: false, foreign_key: true |
 
 ### Association
-| has_one :user_id |
-| has_one :item_id |
+- has_one_active_hash :prefectures
+- has_one :purchase
 
 
 ## purchase
-| Column        | Type     | Options     |
-| ------------- | -------- | ----------- |
-| purchase_date | date     | null: false |
-| purchase_time | datetime | null: false |
+| Column           | Type    | Options                        |
+| ---------------- | ------- | ------------------------------ |
+| user             | integer | null: false, foreign_key: true |
+| item             | integer | null: false, foreign_key: true |
+| shipping_address | integer | null: false, foreign_kew: true |
 
 ### Association
-| belongs_to :user_id |
-| has_one :item_id    |
+- belongs_to :user
+- belongs_to :item
+- belongs_to :shipping_address
+
 
 
 * Database initialization
