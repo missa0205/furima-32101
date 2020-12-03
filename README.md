@@ -16,16 +16,16 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column           | Type   | Options                   |
-| ---------------- | ------ | ------------------------- |
-| nickname         | string | null: false, unique: true |
-| email            | string | null: false, unique: true |
-| password         | string | null: false               |
-| family_name      | string | null: false               |
-| first_name       | string | null: false               |
-| family_name_kana | string | null: false               |
-| first_name_kana  | string | null: false               |
-| birth      　　　 | date   | null: false               |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false, unique: true |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| family_name        | string | null: false               |
+| first_name         | string | null: false               |
+| family_name_kana   | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birth      　　　   | date   | null: false               |
 
 ### Association
 - has_many :items
@@ -37,17 +37,17 @@ Things you may want to cover:
 | ----------------- | ---------- | ----------- |
 | item_name         | string     | null: false |
 | introduction      | text       | null: false |
-| category          | integer    | null: false |
-| item_condition    | integer    | null: false |
-| postage_payer     | integer    | null: false |
-| shipping_area     | integer    | null: false |
-| shipping_day      | integer    | null: false |
+| category_id       | integer    | null: false |
+| item_condition_id | integer    | null: false |
+| postage_payer_id  | integer    | null: false |
+| shipping_area_id  | integer    | null: false |
+| prefectures       | integer    | null: false |
 | price             | integer    | null: false |
 | user              | references | null: false |
 
 ### Association
 
-- belongs_to :user_id
+- belongs_to :user
 - has_one :purchase
 - belongs_to_active_hash :category
 - belongs_to_active_hash :item_condition
@@ -60,7 +60,7 @@ Things you may want to cover:
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | postal_code   | string     | null: false                    |
-| prefecture    | integer    | null: false, foreign_key: true |
+| prefectures   | integer    | null: false                    |
 | city          | string     | null: false                    |
 | house_number  | string     | null: false                    |
 | building_name | string     |                                |
@@ -77,12 +77,11 @@ Things you may want to cover:
 | ---------------- | ------- | ------------------------------ |
 | user             | integer | null: false, foreign_key: true |
 | item             | integer | null: false, foreign_key: true |
-| shipping_address | integer | null: false, foreign_kew: true |
 
 ### Association
 - belongs_to :user
 - belongs_to :item
-- belongs_to :shipping_address
+- has_one :shipping_address
 
 
 
