@@ -8,7 +8,6 @@ FactoryBot.define do
     postage_payer_id { 2 }
     prefecture_id { 2 }
     shipping_day_id { 2 }
-    user_id { 1 }
 
     association :user
 
