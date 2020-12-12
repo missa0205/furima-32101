@@ -13,9 +13,8 @@ class Item < ApplicationRecord
     validates :name,  length: { maximum: 40 }
     validates :introduction, length: { maximum: 1000 }
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than: 9_999_999 }, format: { with: /\A[0-9]+\Z/ }
-    validates :user
   end
-  
+
   with_options numericality: { other_than: 1 } do
     validates :category_id
     validates :condition_id
