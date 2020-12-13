@@ -129,7 +129,9 @@
           <% @items.each do |item| %>
             <li class='list'>
               <div class='item-img-content'>
-                <%= image_tag item.image, class: "item-img" if item.image.attached? %>
+                <%= link_to item_path(item.id), method: :get do %>
+                  <%= image_tag item.image, class: "item-img" if item.image.attached? %>
+                <% end %>
               </div>
               <div class= 'item-info'>
                 <h3 class='item-name'>
@@ -149,7 +151,7 @@
       <% end %>
 
 
-    <% if @items.length == 0 %>
+      <% if @items.length == 0 %>
       <ul class='item-lists'>
         <li class='list'>
           <%= link_to "#" do %>
