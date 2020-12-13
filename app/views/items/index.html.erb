@@ -126,8 +126,8 @@
     <%= link_to '新規投稿商品', "items/new", class: "subtitle" %>
       <% if @items[0] != nil %>
         <ul class='item-lists'>
-          <li class='list'>
-            <% @items.each do |item| %>
+          <% @items.each do |item| %>
+            <li class='list'>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" if item.image.attached? %>
               </div>
@@ -143,8 +143,8 @@
                   </div>
                 </div>
               </div>
-            <% end %>
-          </li>
+            </li>
+          <% end %>
         </ul>
       <% end %>
 
