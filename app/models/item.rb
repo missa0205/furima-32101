@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     validates :image
-    validates :name,  length: { maximum: 40 }
+    validates :name, length: { maximum: 40 }
     validates :introduction, length: { maximum: 1000 }
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than: 9_999_999 }, format: { with: /\A[0-9]+\Z/ }
   end
@@ -22,5 +22,4 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :shipping_day_id
   end
-  
 end
